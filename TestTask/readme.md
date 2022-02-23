@@ -1,0 +1,2 @@
+In this task I have design two pages Home.tsx and AddDetails.tsx in home page there is a list of assignments and in add details user can add details of assignments using text inputs fields and submit data. This data will visible on home page list.
+TypeScript and React used in frontend.
