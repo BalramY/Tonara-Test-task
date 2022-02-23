@@ -32,7 +32,7 @@ const AddDetails = () => {
       days: days,
       days_practiced: daysPractice,
     };
-    fetch('http://192.168.1.191:8000/api/v1/assignment/', {
+    fetch('http://192.168.1.191:5000/api/v1/assignment/', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data),

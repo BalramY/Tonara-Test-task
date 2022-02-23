@@ -31,7 +31,7 @@ const Home = () => {
   const [data, setData] = useState<Data>();
   const [searchData, setSearchData] = useState<Data>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     getData();
@@ -43,7 +43,7 @@ const Home = () => {
 
   const getData = () => {
     setLoading(true);
-    fetch('http://192.168.1.191:8000/api/v1/assignment/', {
+    fetch('http://192.168.1.191:5000/api/v1/assignment/', {
       method: 'get',
       headers: {'Content-Type': 'application/json'},
     })
@@ -67,7 +67,7 @@ const Home = () => {
         borderRadius: 5,
         padding: hp('2%'),
         marginHorizontal: hp('3%'),
-        marginBottom: hp('2%')
+        marginBottom: hp('2%'),
       }}>
       <Text
         style={{
@@ -125,20 +125,22 @@ const Home = () => {
     );
   };
 
-  const search = (txt) => {
+  const search = txt => {
     setSearchText(txt);
     let text = txt.toLowerCase();
-    let filter = data.filter((item) => {
-      if (item?.title?.toLowerCase().match(text)) {
+    let filter = data.filter(item => {
+      if (
+        item?.title?.toLowerCase().match(text) ||
+        item?.description?.toLowerCase().match(text)
+      ) {
         return item;
       }
     });
-    console.log('----filter-----',filter,txt)
-    if(txt){
-    setSearchData(filter);
-    }
-    else{
-    setSearchData(data);
+    console.log('----filter-----', filter, txt);
+    if (txt) {
+      setSearchData(filter);
+    } else {
+      setSearchData(data);
     }
   };
   return (
@@ -192,21 +194,21 @@ const Home = () => {
         placeholder="Search"
         value={searchText}
         style={{
-            width: wp('85%') ,
-            height: 40,
-            marginTop:hp('2%'),
-           alignSelf:"center",
-            borderColor: '#D8D8D8',
-            borderRadius:20,
-            backgroundColor: 'white',
-            paddingLeft:20,
-          }}
+          width: wp('85%'),
+          height: 40,
+          marginTop: hp('2%'),
+          alignSelf: 'center',
+          borderColor: '#D8D8D8',
+          borderRadius: 20,
+          backgroundColor: 'white',
+          paddingLeft: 20,
+        }}
         onChangeText={(e: string) => {
           search(e);
         }}
         placeholderTextColor={'black'}
       />
-      <View style={{marginTop: hp('3%'),paddingBottom:hp('24%')}}>
+      <View style={{marginTop: hp('3%'), paddingBottom: hp('38%')}}>
         {loading ? (
           <ActivityIndicator color="#333333" size="large" />
         ) : (
