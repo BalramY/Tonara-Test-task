@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import TextInput from './TextInput';
 import {
@@ -22,6 +21,7 @@ const AddDetails = () => {
   const [daysPractice, setDaysPractice] = useState('');
   const [timePractice, setTimePractice] = useState('');
   const [music, setMusic] = useState('');
+  const [pdfUrl, setPdfUrl] = useState('');
 
   const onSubmit = () => {
     const data = {
@@ -31,6 +31,7 @@ const AddDetails = () => {
       daily_practice_time: timePractice,
       days: days,
       days_practiced: daysPractice,
+      pdf: pdfUrl,
     };
     fetch('http://192.168.1.191:5000/api/v1/assignment/', {
       method: 'post',
@@ -54,14 +55,14 @@ const AddDetails = () => {
       music === '' ||
       daysPractice === '' ||
       days === '' ||
-      timePractice === ''
+      timePractice === '' ||
+      pdfUrl === ''
     ) {
       return true;
     } else {
       return false;
     }
   };
-  View;
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={30}
@@ -70,7 +71,6 @@ const AddDetails = () => {
       <ScrollView
         style={styles.innerContainer}
         contentContainerStyle={{alignItems: 'center'}}>
-        <Text style={styles.headerText}>Add Details</Text>
         <TextInput
           placeholder="Title"
           value={title}
@@ -107,6 +107,12 @@ const AddDetails = () => {
           onChangeText={(text: string) => setDaysPractice(text)}
           width={wp('80%')}
         />
+        <TextInput
+          placeholder="Pdf URL"
+          value={pdfUrl}
+          onChangeText={(text: string) => setPdfUrl(text)}
+          width={wp('80%')}
+        />
         <TouchableOpacity
           disabled={validation()}
           onPress={() => onSubmit()}
@@ -127,13 +133,13 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     backgroundColor: '#F3F6FA',
-    paddingTop: hp('5%'),
+    paddingVertical: hp('3%'),
     paddingHorizontal: hp('2%'),
     flex: 1,
   },
   buttonText: {fontSize: 15, color: 'white'},
   button: {
-    marginTop: 30,
+    marginVertical: 30,
     paddingVertical: hp('2%'),
     width: wp('50%'),
     alignSelf: 'center',

@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
   View,
   TextInput,
+  Linking,
+  Alert,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -61,7 +63,12 @@ const Home = () => {
   };
 
   const Item = ({item}) => (
-    <View
+    <TouchableOpacity
+      onPress={() => {
+        item.pdf
+          ? navigation.navigate('PDF', {url: item.pdf})
+          : Alert.alert('No PDF');
+      }}
       style={{
         backgroundColor: 'white',
         borderRadius: 5,
@@ -105,7 +112,7 @@ const Home = () => {
           source={require('../assets/user.png')}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   const renderItem = ({item}) => <Item item={item} />;
@@ -196,7 +203,7 @@ const Home = () => {
         style={{
           width: wp('85%'),
           height: 40,
-          marginTop: hp('2%'),
+          marginVertical: hp('2%'),
           alignSelf: 'center',
           borderColor: '#D8D8D8',
           borderRadius: 20,
@@ -208,7 +215,7 @@ const Home = () => {
         }}
         placeholderTextColor={'black'}
       />
-      <View style={{marginTop: hp('3%'), paddingBottom: hp('38%')}}>
+      <View style={{flex: 1}}>
         {loading ? (
           <ActivityIndicator color="#333333" size="large" />
         ) : (

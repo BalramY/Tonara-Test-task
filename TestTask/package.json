@@ -12,8 +12,11 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "fbjs": "^3.0.4",
     "react": "17.0.2",
     "react-native": "0.67.2",
+    "react-native-blob-util": "^0.14.0",
+    "react-native-pdf": "^6.4.0",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "^3.4.1",
